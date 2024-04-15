@@ -4,21 +4,21 @@ import { useParams, Link } from "react-router-dom";
 
 
 
-function WelcomeComponet(){
+function WelcomeComponent(){
 
-    const [getData, setData] = useState()
+    const [data, setData] = useState()
 
     function callHelloWorldRestApi(){
         axios.get("http://localhost:8080/hello-world")
-        .then(( response )=> successfulResponce(response) )
+        .then(( response )=> setData(response.data) )
         .catch((error) => errorResponce(error))
         .finally( ()=> console.log("cleanup"))
     }
 
-    function successfulResponce(response){
-        console.log(response);
+    // function successfulResponce(response){
+    //     console.log(response);
         
-    }
+    // }
 
     function errorResponce(error){
         console.log(error);
@@ -34,8 +34,9 @@ function WelcomeComponet(){
         <div>
             <button className="btn btn-success m-4" onClick={callHelloWorldRestApi}>Call rest api</button>
         </div> 
+        <div>{data}</div>
         </div>
     )
 }
 
-export default WelcomeComponet;
+export default WelcomeComponent;
